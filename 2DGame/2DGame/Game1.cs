@@ -16,12 +16,23 @@ namespace _2DGame
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        Player player;
+        Texture2D bombImage;
+        Texture2D bulletImage;
+        Texture2D horizonImage;
+        Texture2D verticianImage;
+        Texture2D FleelerImage;
+        Texture2D ChaserImage;
+        Texture2D PowerupImage;
+        GameWorld gameWorld;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 800;
             Content.RootDirectory = "Content";
         }
 
@@ -33,7 +44,9 @@ namespace _2DGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            player = new Player();
+            gameWorld = new GameWorld(player);
+
 
             base.Initialize();
         }
@@ -46,6 +59,10 @@ namespace _2DGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            player.image = Content.Load<Texture2D>("playerShip");
+            // bomb image
+            // bullet image
+            // all enemy ship images
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,6 +87,8 @@ namespace _2DGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            gameWorld.player.updatePlayer();
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -81,9 +100,11 @@ namespace _2DGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+            spriteBatch.Draw(gameWorld.player.image, gameWorld.player.location, Color.White);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

@@ -1,0 +1,7 @@
+C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\bin\x86\Debug\2DGame.exe
+C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\bin\x86\Debug\2DGame.pdb
+C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\obj\x86\Debug\2DGame.csprojResolveAssemblyReference.cache
+C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\obj\x86\Debug\2DGame.exe
+C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\obj\x86\Debug\2DGame.pdb
+C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\bin\x86\Debug\Content\playerShip.xnb
