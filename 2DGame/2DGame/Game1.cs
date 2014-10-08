@@ -16,23 +16,28 @@ namespace _2DGame
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        Player player;
-        Texture2D bombImage;
-        Texture2D bulletImage;
-        Texture2D horizonImage;
-        Texture2D verticianImage;
-        Texture2D FleelerImage;
-        Texture2D ChaserImage;
-        Texture2D PowerupImage;
-        GameWorld gameWorld;
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        Player player;                       // The player
+        static int gwWidth = 1500;           // Width of game window
+        static int gwHeight = 1000;          // height of game window
+        Texture2D playerImage;               // image of the player
+        Texture2D reticle;                   // image of the reticle
+        static Vector2 origin;               // origin of player image
+        SpriteEffects playerEffect;          // effects on the player sprite
+        Texture2D bombImage;                 // image of the bomb
+        Texture2D bulletImage;               // image of the bullet
+        Texture2D horizonImage;              // image of horizon enemy
+        Texture2D verticianImage;            // image of vertician enemy
+        Texture2D fleelerImage;              // image of fleeler enemy
+        Texture2D chaserImage;               // image of chaser enemy
+        GameWorld gameWorld;                 // the game world 
+        GraphicsDeviceManager graphics;      // graphical options 
+        SpriteBatch spriteBatch;             // sprites to display
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = 800;
-            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = gwHeight;  // Sets the window height
+            graphics.PreferredBackBufferWidth = gwWidth;    // Sets the window width
             Content.RootDirectory = "Content";
         }
 
@@ -57,14 +62,22 @@ namespace _2DGame
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            player.image = Content.Load<Texture2D>("playerShip");
-            // bomb image
-            // bullet image
-            // all enemy ship images
-
-            // TODO: use this.Content to load your game content here
+            // Load Images
+            playerImage = Content.Load<Texture2D>("playerShip");
+            player.image = playerImage;
+            reticle = Content.Load<Texture2D>("Reticle");
+            player.retImage = reticle;
+            bulletImage = Content.Load<Texture2D>("Bullet");
+            horizonImage = Content.Load<Texture2D>("Horizon");
+            verticianImage = Content.Load<Texture2D>("Vertician");
+            fleelerImage = Content.Load<Texture2D>("Fleeler");
+            chaserImage = Content.Load<Texture2D>("Chaser");
+            bombImage = Content.Load<Texture2D>("Bomb");
+            // Other Loads
+            origin = new Vector2(playerImage.Width / 2, playerImage.Height / 2);
+            playerEffect = SpriteEffects.None;
+            player.bulletSound = Content.Load<SoundEffect>("Laser");
         }
 
         /// <summary>
@@ -73,7 +86,6 @@ namespace _2DGame
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -87,7 +99,7 @@ namespace _2DGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            gameWorld.player.updatePlayer();
+            player.updatePlayer();
 
             // TODO: Add your update logic here
 
@@ -103,7 +115,14 @@ namespace _2DGame
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-            spriteBatch.Draw(gameWorld.player.image, gameWorld.player.location, Color.White);
+            spriteBatch.Draw(playerImage, player.location, null, Color.White, player.rotation, origin, 1f, playerEffect, 0);
+            // Display all bullets
+            for (int i = 0; i < player.bullets.Count; i++)
+            {
+                spriteBatch.Draw(bulletImage, player.bullets[i].location, Color.White);
+            }
+            
+            spriteBatch.Draw(reticle, player.reticleLoc, Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

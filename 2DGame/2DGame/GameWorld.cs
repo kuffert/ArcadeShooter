@@ -8,23 +8,22 @@ namespace _2DGame
 {
     class GameWorld
     {
-        public Player player;
-        int score;
-        int bombCount;
-        int time;
-        ArrayList enemies;
-        ArrayList bullets;
-        ArrayList powerups;
+        public Player player;      // the Player in the world
+        int score;                 // current player score
+        int bombCount;             // current # of bombs
+        int time;                  // time left
+        List<Enemy> enemies;       // list of enemies
+        List<Powerup> powerups;    // list of powerups
 
+        // Constructor for the game world
         public GameWorld(Player player)
         {
             this.player = player;
             score = 0;
             bombCount = 2;
             time = 120;
-            enemies = new ArrayList();
-            bullets = new ArrayList();
-            powerups = new ArrayList();
+            enemies = new List<Enemy>();
+            powerups = new List<Powerup>();
         }
     }
 }

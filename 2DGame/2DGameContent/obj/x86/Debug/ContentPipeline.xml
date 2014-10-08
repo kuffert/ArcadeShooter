@@ -7,8 +7,80 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\bin\x86\Debug\Content\playerShip.xnb</Output>
-      <Time>2014-10-01T15:58:55.0219962-04:00</Time>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\playerShip.xnb</Output>
+      <Time>2014-10-06T19:19:02.2626229-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Horizon.bmp</Source>
+      <Name>Horizon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Horizon.xnb</Output>
+      <Time>2014-10-06T19:17:41.0589783-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Chaser.bmp</Source>
+      <Name>Chaser</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Chaser.xnb</Output>
+      <Time>2014-10-06T19:18:03.7052736-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Fleeler.bmp</Source>
+      <Name>Fleeler</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Fleeler.xnb</Output>
+      <Time>2014-10-06T19:19:19.2345936-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Vertician.bmp</Source>
+      <Name>Vertician</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Vertician.xnb</Output>
+      <Time>2014-10-06T19:18:39.4973208-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Reticle.bmp</Source>
+      <Name>Reticle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Reticle.xnb</Output>
+      <Time>2014-10-07T21:44:40.7092007-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Bullet.bmp</Source>
+      <Name>Bullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Bullet.xnb</Output>
+      <Time>2014-10-07T22:05:40.8642775-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Bomb.bmp</Source>
+      <Name>Bomb</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Bomb.xnb</Output>
+      <Time>2014-10-07T23:45:51.8940887-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Laser.wav</Source>
+      <Name>Laser</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Laser.xnb</Output>
+      <Time>2014-10-07T23:52:55.9713362-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -16,10 +88,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGameContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGameContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Chris\Documents\GitHub\2DGame\2DGame\2DGame\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGameContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGameContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
