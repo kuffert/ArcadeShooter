@@ -3,4 +3,36 @@
 
 2D Game using Microsoft XNA
 
-This is a 2D I am designing for NEU CS 4850. It has no official name yet as I am not sure what direction I am heading yet. 
+This is a 2D work-in-progress Geometry Wars style of arcade shooter.
+
+Implemented:
+
+- Player WASD movement
+
+- Player shooting
+
+- Player rotating towards mouse
+
+- Sound effects on fire
+
+- All art assets incorporated but not all used yet
+
+TODO:
+
+- Implement Horizon enemy (left<->right movement)
+
+- Implement Vertician enemy (up<->down movement)
+
+- Implement Fleeler enemy (avoids player)
+
+- Implement Chaser enemy (follows player)
+
+- Collision detection
+
+- Garbage Collection (anything offscreen)
+
+- Barriers for player/enemies
+
+
+
+
