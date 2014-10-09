@@ -7,24 +7,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _2DGame
 {
+    // This enemy type will consistently move left and right
+    // on the horizontal axis.
     class Horizon : Enemy
     {
-
         Horizon(Vector2 loc)
         {
+            this.image = ArcadeShooter.horizonImage;
             this.location = loc;
         }
 
         // Inherited from Enemy superclass:
-        
-        // Displays the enemy
-        protected override void displayEnemy()
-        {
-            throw new NotImplementedException();
-        }
 
-        // Moves the enemy
-        protected override void moveEnemy()
+        // Moves the Horizon enemy
+        public override void moveAISprite()
         {
             throw new NotImplementedException();
         }

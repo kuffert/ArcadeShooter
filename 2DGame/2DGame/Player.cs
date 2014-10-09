@@ -15,7 +15,7 @@ namespace _2DGame
 {
     // This class contains all the attributes of the player's ship.
     // This includes its image, current location, rotation angle, and H/V velocities
-    class Player
+    public class Player
     {
         public Texture2D image;          // Image of the player
         public Texture2D retImage;       // reticle Image
@@ -23,16 +23,16 @@ namespace _2DGame
         public Vector2 reticleLoc;       // location of the targeting reticle
         public float rotation;           // players angular rotation
         public float vel;                // players current velocity
-        public List<Bullet> bullets;     // List of bullets the player has fired
+        public List<AISprite> bullets;   // List of bullets the player has fired
         public SoundEffect bulletSound;  // laser sound effect
         int counter;                     // sound interval counter
 
         // Player Constructor
         public Player()
         {
-            location = new Vector2(750, 500);
+            location = new Vector2(ArcadeShooter.width/2, ArcadeShooter.height/2);
             reticleLoc = new Vector2(750, 500);  
-            bullets = new List<Bullet>();
+            bullets = new List<AISprite>();
             vel = 10f;
         }
 
@@ -49,6 +49,7 @@ namespace _2DGame
             reticleLoc = new Vector2(ms.X - retImage.Width/2, ms.Y - retImage.Height/2);
 
             // Moving the player based on input commands:
+            // TODO: Modify movement system, possibly acceleration/speed reduction when key is released.
             // TODO: Block player from exiting boundaries
             KeyboardState curState = Keyboard.GetState();
             if (curState.IsKeyDown(Keys.W)) { location.Y -= vel; }  // W moves Up,
@@ -59,7 +60,7 @@ namespace _2DGame
             // Firing projectiles
             // TODO: Garbage collection of projectiles beyond boundaries
             fireBullet(curState, location, mouseLoc);
-            moveAllBullets();
+            //moveAllBullets();
         }
 
         // Fires a bullet, adding it to the list of fired bullets.
@@ -80,7 +81,7 @@ namespace _2DGame
         {
             for (int i = 0; i < bullets.Count; i++)
             {
-                bullets[i].moveBullet();
+                ((Bullet)bullets[i]).moveAISprite();
             }
         }
         

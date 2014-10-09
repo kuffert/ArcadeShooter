@@ -7,16 +7,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _2DGame
 {
-    abstract class Enemy
+    abstract class Enemy : AISprite
     {
-        protected Texture2D image;
-        protected Vector2 location;
-
-
+        // Enemy specific data
         // Methods for the subclasses:
-        // Displays the enemy
-        protected abstract void displayEnemy();
-        // Moves the enemy based on its mechanic
-        protected abstract void moveEnemy();
     }
 }

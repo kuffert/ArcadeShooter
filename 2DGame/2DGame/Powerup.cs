@@ -5,7 +5,7 @@ using System.Text;
 
 namespace _2DGame
 {
-    abstract class Powerup
+    abstract class Powerup : AISprite
     {
     }
 }

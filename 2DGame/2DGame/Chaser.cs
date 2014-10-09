@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace _2DGame
 {
+    // This enemy type will follow the player ceaselessly, 
+    // trying to bump into  and kill them.
     class Chaser : Enemy
     {
-
-        // Inherited from Enemy superclass:
-
-        // Displays the enemy
-        protected override void displayEnemy()
+        Chaser(Vector2 loc)
         {
-            throw new NotImplementedException();
+            this.image = ArcadeShooter.chaserImage;
+            this.location = loc;
         }
 
-        // Moves the enemy
-        protected override void moveEnemy()
+        // Inherited from AISprite/Enemy superclass:
+
+        // Moves the Chaser enemy
+        public override void moveAISprite()
         {
             throw new NotImplementedException();
         }

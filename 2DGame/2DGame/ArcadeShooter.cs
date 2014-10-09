@@ -14,30 +14,37 @@ namespace _2DGame
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class ArcadeShooter : Microsoft.Xna.Framework.Game
     {
-        Player player;                       // The player
-        static int gwWidth = 1500;           // Width of game window
-        static int gwHeight = 1000;          // height of game window
-        Texture2D playerImage;               // image of the player
-        Texture2D reticle;                   // image of the reticle
-        static Vector2 origin;               // origin of player image
-        SpriteEffects playerEffect;          // effects on the player sprite
-        Texture2D bombImage;                 // image of the bomb
-        Texture2D bulletImage;               // image of the bullet
-        Texture2D horizonImage;              // image of horizon enemy
-        Texture2D verticianImage;            // image of vertician enemy
-        Texture2D fleelerImage;              // image of fleeler enemy
-        Texture2D chaserImage;               // image of chaser enemy
-        GameWorld gameWorld;                 // the game world 
-        GraphicsDeviceManager graphics;      // graphical options 
-        SpriteBatch spriteBatch;             // sprites to display
+        Player player;                          // The player
+        int gwWidth = 1500;                     // Width of game window
+        int gwHeight = 1000;                    // height of game window
+        public static int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        public static int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+        Texture2D playerImage;                  // image of the player
+        Texture2D reticle;                      // image of the reticle
+        static Vector2 origin;                  // origin of player image
+        SpriteEffects playerEffect;             // effects on the player sprite
+        Texture2D bombImage;                    // image of the bomb
+        public static Texture2D bulletImage;    // image of the bullet
+        public static Texture2D horizonImage;   // image of horizon enemy
+        public static Texture2D verticianImage; // image of vertician enemy
+        public static Texture2D fleelerImage;   // image of fleeler enemy
+        public static Texture2D chaserImage;    // image of chaser enemy
+        GraphicsDeviceManager graphics;         // graphical options 
+        SpriteBatch spriteBatch;                // sprites to display
+        int score;                              // current player score
+        int bombCount;                          // current # of bombs
+        int time;                               // time left
+        public List<AISprite> enemies;          // list of enemies
+        public List<AISprite> powerups;         // list of powerups
 
-        public Game1()
+        public ArcadeShooter()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferHeight = gwHeight;  // Sets the window height
             graphics.PreferredBackBufferWidth = gwWidth;    // Sets the window width
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -50,9 +57,7 @@ namespace _2DGame
         protected override void Initialize()
         {
             player = new Player();
-            gameWorld = new GameWorld(player);
-
-
+            // TODO: any other inits...
             base.Initialize();
         }
 
@@ -96,10 +101,13 @@ namespace _2DGame
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+            KeyboardState ks = Keyboard.GetState();
+            if (ks.IsKeyDown(Keys.Escape))  { this.Exit(); }
 
-            player.updatePlayer();
+            // Updates Objects in the gameworld
+            player.updatePlayer();           // Moves, Rotates, and Fires
+            moveAISprites(player.bullets);   // Moves existing bullets
+            removeOOB(player.bullets);       // Removes OOB bullets
 
             // TODO: Add your update logic here
 
@@ -116,16 +124,43 @@ namespace _2DGame
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             spriteBatch.Draw(playerImage, player.location, null, Color.White, player.rotation, origin, 1f, playerEffect, 0);
-            // Display all bullets
-            for (int i = 0; i < player.bullets.Count; i++)
-            {
-                spriteBatch.Draw(bulletImage, player.bullets[i].location, Color.White);
-            }
+
+            displayAISprites(player.bullets);    // Display bullets
+            //displayAISprites(enemies);           // Display enemies
+            //displayAISprites(powerups);          // Display powerups
             
             spriteBatch.Draw(reticle, player.reticleLoc, Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        // When a passed in a list of AISprites (bullets, enemies, powerups)
+        // This function will display each one's corresponding image.
+        protected void displayAISprites(List<AISprite> sprites)
+        {
+            for (int i = 0; i < sprites.Count; i++)
+            { spriteBatch.Draw(sprites[i].image, sprites[i].location, Color.White); }
+        }
+
+        // Takes a list of AISprites and moves them according to their inherent 
+        // movement scripts. (i.e, vertician moves up/down, but horizon move left/right
+        protected void moveAISprites(List<AISprite> sprites)
+        {
+            for (int i = 0; i < sprites.Count; i++)
+            { sprites[i].moveAISprite(); }
+        }
+
+        // Takes a list of AISprites and removes any that have gone out of bounds.
+        protected void removeOOB(List<AISprite> sprites)
+        {
+            for (int i = 0; i < sprites.Count; i++)
+            {
+                if (sprites[i].checkOOB())
+                {
+                    sprites.Remove(sprites[i]);
+                }
+            }
         }
     }
 }
