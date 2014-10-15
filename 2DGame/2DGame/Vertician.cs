@@ -11,18 +11,25 @@ namespace _2DGame
     // vertical axis.
     class Vertician : Enemy
     {
-        Vertician(Vector2 loc)
+        
+        public Vertician(Vector2 loc, int dir)
         {
             this.image = ArcadeShooter.verticianImage;
             this.location = loc;
+            this.upBound = 0;
+            this.downBound = ArcadeShooter.height - image.Height;
+            this.direction = dir;
+            speed = 10;
         }
 
         // Inherited from Enemy superclass:
 
-        // moves the Vertician enemy
+        // moves the Vertician enemy Up <-> Down
         public override void moveAISprite()
         {
-            throw new NotImplementedException();
+            if (location.Y < upBound) { direction = 1; }
+            if (location.Y > downBound) { direction = -1; }
+            location.Y += speed * direction;
         }
     }
 }

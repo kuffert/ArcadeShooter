@@ -17,8 +17,6 @@ namespace _2DGame
     public class ArcadeShooter : Microsoft.Xna.Framework.Game
     {
         Player player;                          // The player
-        int gwWidth = 1500;                     // Width of game window
-        int gwHeight = 1000;                    // height of game window
         public static int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         public static int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         Texture2D playerImage;                  // image of the player
@@ -42,8 +40,8 @@ namespace _2DGame
         public ArcadeShooter()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferHeight = gwHeight;  // Sets the window height
-            graphics.PreferredBackBufferWidth = gwWidth;    // Sets the window width
+            graphics.PreferredBackBufferHeight = height;  // Sets the window height
+            graphics.PreferredBackBufferWidth = width;    // Sets the window width
             graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
@@ -57,7 +55,8 @@ namespace _2DGame
         protected override void Initialize()
         {
             player = new Player();
-            // TODO: any other inits...
+            enemies = new List<AISprite>();
+            powerups = new List<AISprite>();
             base.Initialize();
         }
 
@@ -67,6 +66,7 @@ namespace _2DGame
         /// </summary>
         protected override void LoadContent()
         {
+            // Load Sprite Batch
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // Load Images
             playerImage = Content.Load<Texture2D>("playerShip");
@@ -83,6 +83,7 @@ namespace _2DGame
             origin = new Vector2(playerImage.Width / 2, playerImage.Height / 2);
             playerEffect = SpriteEffects.None;
             player.bulletSound = Content.Load<SoundEffect>("Laser");
+            levelOne();
         }
 
         /// <summary>
@@ -102,14 +103,18 @@ namespace _2DGame
         {
             // Allows the game to exit
             KeyboardState ks = Keyboard.GetState();
-            if (ks.IsKeyDown(Keys.Escape))  { this.Exit(); }
+            escPressed(ks);
 
             // Updates Objects in the gameworld
             player.updatePlayer();           // Moves, Rotates, and Fires
+            moveAISprites(enemies);          // Moves existing enemies
             moveAISprites(player.bullets);   // Moves existing bullets
-            removeOOB(player.bullets);       // Removes OOB bullets
+            moveAISprites(powerups);
 
-            // TODO: Add your update logic here
+            // Garbage Collection
+            removeOOB(player.bullets);       // Removes OOB bullets
+            removeOOB(enemies);              // Removes any enemies that somehow go OOB
+            removeOOB(powerups);
 
             base.Update(gameTime);
         }
@@ -123,14 +128,17 @@ namespace _2DGame
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-            spriteBatch.Draw(playerImage, player.location, null, Color.White, player.rotation, origin, 1f, playerEffect, 0);
 
-            displayAISprites(player.bullets);    // Display bullets
-            //displayAISprites(enemies);           // Display enemies
-            //displayAISprites(powerups);          // Display powerups
-            
+            // Draw Player
+            spriteBatch.Draw(playerImage, player.location, null, Color.White, player.rotation, origin, 1f, playerEffect, 0); 
+            // Draw bullets, enemies and powerups
+            displayAISprites(player.bullets); 
+            displayAISprites(enemies);
+            displayAISprites(powerups); 
+            // Draw Reticle
             spriteBatch.Draw(reticle, player.reticleLoc, Color.White);
-            spriteBatch.End();
+            
+            spriteBatch.End(); 
 
             base.Draw(gameTime);
         }
@@ -140,7 +148,9 @@ namespace _2DGame
         protected void displayAISprites(List<AISprite> sprites)
         {
             for (int i = 0; i < sprites.Count; i++)
-            { spriteBatch.Draw(sprites[i].image, sprites[i].location, Color.White); }
+            { 
+                spriteBatch.Draw(sprites[i].image, sprites[i].location, Color.White); 
+            }
         }
 
         // Takes a list of AISprites and moves them according to their inherent 
@@ -148,7 +158,9 @@ namespace _2DGame
         protected void moveAISprites(List<AISprite> sprites)
         {
             for (int i = 0; i < sprites.Count; i++)
-            { sprites[i].moveAISprite(); }
+            { 
+                sprites[i].moveAISprite(); 
+            }
         }
 
         // Takes a list of AISprites and removes any that have gone out of bounds.
@@ -160,6 +172,24 @@ namespace _2DGame
                 {
                     sprites.Remove(sprites[i]);
                 }
+            }
+        }
+
+        // Initializes level one
+        protected void levelOne()
+        {
+            AISprite horiz1 = new Horizon(new Vector2(0, 0), 1);
+            AISprite verti1 = new Vertician(new Vector2(0, width / 4), -1);
+            enemies.Add(horiz1);
+            enemies.Add(verti1);
+        }
+
+        // ESC Button Pressed
+        protected void escPressed(KeyboardState ks)
+        {
+            if (ks.IsKeyDown(Keys.Escape))
+            {
+                this.Exit();
             }
         }
     }

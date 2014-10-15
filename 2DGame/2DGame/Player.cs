@@ -25,7 +25,7 @@ namespace _2DGame
         public float vel;                // players current velocity
         public List<AISprite> bullets;   // List of bullets the player has fired
         public SoundEffect bulletSound;  // laser sound effect
-        int counter;                     // sound interval counter
+        int counter;                     // interval counter for sounds and bullets
 
         // Player Constructor
         public Player()
@@ -39,6 +39,7 @@ namespace _2DGame
         // Update the player location
         public void updatePlayer()
         {
+            counter++;
             // The following allows the player to rotate to face the mouse:
             MouseState ms = Mouse.GetState();
             Vector2 mouseLoc = new Vector2(ms.X, ms.Y);
@@ -49,50 +50,39 @@ namespace _2DGame
             reticleLoc = new Vector2(ms.X - retImage.Width/2, ms.Y - retImage.Height/2);
 
             // Moving the player based on input commands:
-            // TODO: Modify movement system, possibly acceleration/speed reduction when key is released.
-            // TODO: Block player from exiting boundaries
             KeyboardState curState = Keyboard.GetState();
-            if (curState.IsKeyDown(Keys.W)) { location.Y -= vel; }  // W moves Up,
-            if (curState.IsKeyDown(Keys.S)) { location.Y += vel; }  // S moves Down,
-            if (curState.IsKeyDown(Keys.A)) { location.X -= vel; }  // A moves Left,
-            if (curState.IsKeyDown(Keys.D)) { location.X += vel; }  // D moves right.
+            move(curState);
 
             // Firing projectiles
-            // TODO: Garbage collection of projectiles beyond boundaries
-            fireBullet(curState, location, mouseLoc);
-            //moveAllBullets();
+            fireBullet(ms, location, mouseLoc);
         }
 
         // Fires a bullet, adding it to the list of fired bullets.
-        public void fireBullet(KeyboardState ks, Vector2 start, Vector2 end)
+        public void fireBullet(MouseState ms, Vector2 start, Vector2 end)
         {
             Vector2 offsetStart = new Vector2(start.X - image.Width / 2, start.Y - image.Height / 2);
             Vector2 offsetEnd = new Vector2(end.X - retImage.Width / 2, end.Y - retImage.Height / 2);
-            if (ks.IsKeyDown(Keys.Space))
+            if (ms.LeftButton == ButtonState.Pressed && counter%5 == 0)
             {
                 Bullet b = new Bullet(offsetStart, offsetEnd);
-                playLaserSound();
+                bulletSound.Play();
                 bullets.Add(b);
-            }
-        }
-
-        // Move all bullets on the list
-        public void moveAllBullets()
-        {
-            for (int i = 0; i < bullets.Count; i++)
-            {
-                ((Bullet)bullets[i]).moveAISprite();
             }
         }
         
         // Play sound at the appropriate interval
-        public void playLaserSound()
+
+        // Move the player up
+        protected void move(KeyboardState ks)
         {
-            if (counter == 5) { counter = 0; bulletSound.Play(); }
-            counter++;
+            if (ks.IsKeyDown(Keys.W) && location.Y > image.Height / 2) 
+            { location.Y -= vel; } // W moves Up,
+            if (ks.IsKeyDown(Keys.S) && location.Y < ArcadeShooter.height - image.Height / 2)
+            { location.Y += vel; } // S moves Down,
+            if (ks.IsKeyDown(Keys.A) && location.X > image.Width / 2) 
+            { location.X -= vel; } // A moves Left,
+            if (ks.IsKeyDown(Keys.D) && location.X < ArcadeShooter.width - image.Width / 2) 
+            { location.X += vel; } // D moves right.
         }
     }
 }
-
-
-

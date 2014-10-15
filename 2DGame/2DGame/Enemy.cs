@@ -10,6 +10,11 @@ namespace _2DGame
     abstract class Enemy : AISprite
     {
         // Enemy specific data
-        // Methods for the subclasses:
+        protected int direction;
+        protected int leftBound;
+        protected int rightBound;
+        protected int upBound;
+        protected int downBound;
+        protected int speed;
     }
 }
