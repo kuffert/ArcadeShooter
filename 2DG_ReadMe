@@ -17,11 +17,15 @@ Implemented:
 
 - All art assets incorporated but not all used yet
 
-TODO:
-
 - Implement Horizon enemy (left<->right movement)
 
 - Implement Vertician enemy (up<->down movement)
+
+- Garbage Collection (anything offscreen)
+
+- Barriers for player/enemies
+
+TODO:
 
 - Implement Fleeler enemy (avoids player)
 
@@ -29,10 +33,10 @@ TODO:
 
 - Collision detection
 
-- Garbage Collection (anything offscreen)
+- Score
 
-- Barriers for player/enemies
+- Time
 
+- Win/Lose
 
-
-
+- More than one level
