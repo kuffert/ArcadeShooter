@@ -11,7 +11,8 @@ namespace _2DGame
     // on the horizontal axis.
     class Horizon : Enemy
     {
-       public Horizon(Vector2 loc, int dir)
+        // Horizon Constructor
+       public Horizon(Vector2 loc, float dir)
         {
             this.image = ArcadeShooter.horizonImage;
             this.location = loc;
@@ -20,13 +21,12 @@ namespace _2DGame
             this.direction = dir;
             this.speed = 10;
         }
-        // Inherited from Enemy superclass:
 
         // Moves the Horizon enemy Left <-> Right
         public override void moveAISprite()
         {
-            if (location.X >= rightBound) { direction = -1; }
-            if (location.X <= leftBound)  { direction =  1; }
+            if (location.X >= rightBound) { direction = -1f; }
+            if (location.X <= leftBound)  { direction =  1f; }
             location.X += speed * direction;
         }
     }

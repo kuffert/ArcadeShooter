@@ -13,8 +13,10 @@ using Microsoft.Xna.Framework.Media;
 
 namespace _2DGame
 {
-    // This class contains all the attributes of the player's ship.
-    // This includes its image, current location, rotation angle, and H/V velocities
+    /// <summary>
+    /// This class contains all the attributes of the player's ship.
+    /// This includes its image, current location, rotation angle, and H/V velocities
+    /// </summary>
     public class Player
     {
         public Texture2D image;          // Image of the player
@@ -22,10 +24,10 @@ namespace _2DGame
         public Vector2 location;         // Players current location
         public Vector2 reticleLoc;       // location of the targeting reticle
         public float rotation;           // players angular rotation
-        public float vel;                // players current velocity
+        private float vel;               // players current velocity
         public List<AISprite> bullets;   // List of bullets the player has fired
         public SoundEffect bulletSound;  // laser sound effect
-        int counter;                     // interval counter for sounds and bullets
+        private int counter;             // interval counter for sounds and bullets
 
         // Player Constructor
         public Player()
@@ -40,6 +42,7 @@ namespace _2DGame
         public void updatePlayer()
         {
             counter++;
+
             // The following allows the player to rotate to face the mouse:
             MouseState ms = Mouse.GetState();
             Vector2 mouseLoc = new Vector2(ms.X, ms.Y);
@@ -69,10 +72,8 @@ namespace _2DGame
                 bullets.Add(b);
             }
         }
-        
-        // Play sound at the appropriate interval
 
-        // Move the player up
+        // Moves the player, bounded by the window's edges.
         protected void move(KeyboardState ks)
         {
             if (ks.IsKeyDown(Keys.W) && location.Y > image.Height / 2) 

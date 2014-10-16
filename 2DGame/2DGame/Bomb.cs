@@ -5,6 +5,7 @@ using System.Text;
 
 namespace _2DGame
 {
+
     class Bomb : Powerup
     {
         // Moves the bomb powerup

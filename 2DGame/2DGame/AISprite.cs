@@ -7,8 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _2DGame
 {
-    // This class is an abstract parent of all objects in the gameworld
-    // That are NOT the player. This includes enemies, bullets, and powerups.
+    /// <summary>
+    /// This class is an abstract parent of all objects in the gameworld
+    /// That are NOT the player. This includes enemies, bullets, and powerups.
+    /// </summary>
     public abstract class AISprite
     {
         public Texture2D image;

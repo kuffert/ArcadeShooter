@@ -12,11 +12,16 @@ using Microsoft.Xna.Framework.Media;
 namespace _2DGame
 {
     /// <summary>
-    /// This is the main type for your game
+    /// ArcadeShooter represents the main functionality of the game. It contains
+    /// all  necessary information the game needs to keep track of, including the
+    /// player, all sprite images, the size of the game window, all displayed images,
+    /// the bullets, powerups, and enemies, score and time. It manages the initializing
+    /// of data, loading/unloading of content, drawing of images, and other game specific
+    /// functionality.
     /// </summary>
     public class ArcadeShooter : Microsoft.Xna.Framework.Game
     {
-        Player player;                          // The player
+        public static Player player;            // The player
         public static int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         public static int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         Texture2D playerImage;                  // image of the player
@@ -112,9 +117,9 @@ namespace _2DGame
             moveAISprites(powerups);
 
             // Garbage Collection
-            removeOOB(player.bullets);       // Removes OOB bullets
-            removeOOB(enemies);              // Removes any enemies that somehow go OOB
-            removeOOB(powerups);
+            removeOOB(player.bullets);       // Removes any OOB bullets
+            removeOOB(enemies);              // Removes any OOB enemies
+            removeOOB(powerups);             // Removes any OOB powerups
 
             base.Update(gameTime);
         }

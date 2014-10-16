@@ -7,13 +7,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace _2DGame
 {
-    // This class represents and carries information corresponding
-    // to the bullets that the player fires.
+    /// <summary>
+    /// This class carries information corresponding
+    /// to the bullets that the player fires.
+    /// </summary>
     public class Bullet : AISprite
     {
-        Vector2 startLoc;            // Starting Location of the bullet
-        Vector2 destination;         // Target Destination of the bullet
-        float bulletSpeed;           // Travel speed of the bullet
+        private Vector2 startLoc;            // Starting Location of the bullet
+        private Vector2 destination;         // Target Destination of the bullet
+        private float bulletSpeed;           // Travel speed of the bullet
 
         // Bullet Constructor
         public Bullet(Vector2 startLoc, Vector2 dest)
