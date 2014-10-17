@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2DGame", "2DGame\2DGame\2DGame.csproj", "{02BC1C8C-CDE1-4F3D-A1F4-328A15EA0185}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "2DGameContent", "2DGame\2DGameContent\2DGameContent.contentproj", "{1ABADA89-F671-4E91-AFE4-C702326AB466}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2DGameContent", "2DGame\2DGameContent\2DGameContent.contentproj", "{1ABADA89-F671-4E91-AFE4-C702326AB466}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

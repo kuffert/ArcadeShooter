@@ -85,5 +85,21 @@ namespace _2DGame
             if (ks.IsKeyDown(Keys.D) && location.X < ArcadeShooter.width - image.Width / 2) 
             { location.X += vel; } // D moves right.
         }
+
+        // Checks if the player collided with anything on a list of sprites.
+        // This can be used for powerups or enemies.
+        public Boolean playerCollideEnemy(List<AISprite> list)
+        {
+            Vector2 dist = new Vector2(100, 100);
+            for (int i = 0; i < list.Count; i++)
+            {
+                dist = this.location - list[i].location;
+                if (Math.Abs(dist.X) < 25 && Math.Abs(dist.Y) < 25)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

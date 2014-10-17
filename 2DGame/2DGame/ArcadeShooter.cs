@@ -121,6 +121,9 @@ namespace _2DGame
             removeOOB(enemies);              // Removes any OOB enemies
             removeOOB(powerups);             // Removes any OOB powerups
 
+            // Check Collisions
+            checkMultipleCollisions(player.bullets, enemies);
+
             base.Update(gameTime);
         }
 
@@ -184,9 +187,27 @@ namespace _2DGame
         protected void levelOne()
         {
             AISprite horiz1 = new Horizon(new Vector2(0, 0), 1);
-            AISprite verti1 = new Vertician(new Vector2(0, width / 4), -1);
-            enemies.Add(horiz1);
+            AISprite horiz2 = new Horizon(new Vector2(500, width/16), -1);
+            AISprite horiz3 = new Horizon(new Vector2(height-200, width/16*2), 1);
+            AISprite horiz4 = new Horizon(new Vector2(height-100, width/16*3), -1);
+            AISprite verti1 = new Vertician(new Vector2(width / 8, 0), -1);
+            AISprite verti2 = new Vertician(new Vector2(width / 8*2, 400), 1);
+            AISprite verti3 = new Vertician(new Vector2(width /8*7, 0), -1);
+            AISprite verti4 = new Vertician(new Vector2(width / 8*6, 400), 1);
+            AISprite chase1 = new Chaser(new Vector2(50, 100));
+            AISprite chase2 = new Chaser(new Vector2(1600, 500));
+            AISprite chase3 = new Chaser(new Vector2(ArcadeShooter.width / 2, 1000));
+            enemies.Add(horiz1); 
+            enemies.Add(horiz2); 
+            enemies.Add(horiz3); 
+            enemies.Add(horiz4); 
             enemies.Add(verti1);
+            enemies.Add(verti2);
+            enemies.Add(verti3);
+            enemies.Add(verti4);
+            enemies.Add(chase1); 
+            enemies.Add(chase2); 
+            enemies.Add(chase3); 
         }
 
         // ESC Button Pressed
@@ -195,6 +216,20 @@ namespace _2DGame
             if (ks.IsKeyDown(Keys.Escape))
             {
                 this.Exit();
+            }
+        }
+
+        // Checks if anything on one list collided with sprites on
+        // another (For example, bullets with enemies). If it does,
+        // delete it from the list.
+        protected void checkMultipleCollisions(List<AISprite> list1, List<AISprite> list2)
+        {
+            for (int i = 0; i < list1.Count; i++)
+            {
+                if (list1[i].checkSingleCollision(list2))
+                {
+                    list1.Remove(list1[i]);
+                }
             }
         }
     }

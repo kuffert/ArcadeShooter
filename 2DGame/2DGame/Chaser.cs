@@ -11,7 +11,7 @@ namespace _2DGame
     // trying to bump into  and kill them.
     class Chaser : Enemy
     {
-        Chaser(Vector2 loc, float dir)
+        public Chaser(Vector2 loc)
         {
             this.image = ArcadeShooter.chaserImage;
             this.location = loc;
@@ -19,8 +19,8 @@ namespace _2DGame
             this.rightBound = ArcadeShooter.width - image.Width;
             this.upBound = 0;
             this.downBound = ArcadeShooter.height - image.Height;
-            this.direction = dir;
-            this.speed = 8; // Slower than player
+            this.direction = 0;
+            this.speed = 5; // Slower than player
         }
 
         // Inherited from AISprite/Enemy superclass:
@@ -28,7 +28,11 @@ namespace _2DGame
         // Moves the Chaser enemy
         public override void moveAISprite()
         {
-            throw new NotImplementedException();
+            Vector2 offset = new Vector2(ArcadeShooter.player.image.Width/2, ArcadeShooter.player.image.Height/2);
+            Vector2 travelVector = ArcadeShooter.player.location - offset - this.location;
+            travelVector.Normalize();
+            location.X += travelVector.X * speed;
+            location.Y += travelVector.Y * speed;
         }
     }
 }
