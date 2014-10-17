@@ -25,13 +25,15 @@ Implemented:
 
 - Barriers for player/enemies
 
+- Collision detection
+
+- Implement Chaser enemy (follows player)
+
+
 TODO:
 
 - Implement Fleeler enemy (avoids player)
 
-- Implement Chaser enemy (follows player)
-
-- Collision detection
 
 - Score
 
