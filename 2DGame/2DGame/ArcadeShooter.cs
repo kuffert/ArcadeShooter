@@ -41,6 +41,7 @@ namespace _2DGame
         int time;                               // time left
         public List<AISprite> enemies;          // list of enemies
         public List<AISprite> powerups;         // list of powerups
+        SoundEffect backgroundTheme;            // background music
 
         public ArcadeShooter()
         {
@@ -53,7 +54,7 @@ namespace _2DGame
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
+        /// This is where it can query for any required services and load any non-graphic   
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
@@ -88,6 +89,12 @@ namespace _2DGame
             origin = new Vector2(playerImage.Width / 2, playerImage.Height / 2);
             playerEffect = SpriteEffects.None;
             player.bulletSound = Content.Load<SoundEffect>("Laser");
+            backgroundTheme = Content.Load<SoundEffect>("base2");
+            // Plays background music
+            SoundEffectInstance loopBG = backgroundTheme.CreateInstance();
+            loopBG.IsLooped = true;
+            loopBG.Play();
+            // Loads the enemies on the level
             levelOne();
         }
 
@@ -230,6 +237,15 @@ namespace _2DGame
                 {
                     list1.Remove(list1[i]);
                 }
+            }
+        }
+
+        // If the player is hit by an enemy, something(?) happens
+        protected void checkPlayerCollision(List<AISprite> list)
+        {
+            if (player.playerCollideEnemy(list))
+            {
+                // Pause game/lose life/close game?
             }
         }
     }

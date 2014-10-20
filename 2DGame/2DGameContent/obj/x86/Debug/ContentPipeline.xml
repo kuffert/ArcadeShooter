@@ -82,6 +82,24 @@
       <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Laser.xnb</Output>
       <Time>2014-10-07T23:52:55.9713362-04:00</Time>
     </Item>
+    <Item>
+      <Source>success.wav</Source>
+      <Name>success</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\success.xnb</Output>
+      <Time>2014-10-20T18:53:31.1114857-04:00</Time>
+    </Item>
+    <Item>
+      <Source>base2.wav</Source>
+      <Name>base2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\base2.xnb</Output>
+      <Time>2014-10-20T19:02:43.1840624-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
