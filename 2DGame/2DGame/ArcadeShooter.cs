@@ -28,7 +28,6 @@ namespace _2DGame
         Texture2D reticle;                      // image of the reticle
         static Vector2 origin;                  // origin of player image
         SpriteEffects playerEffect;             // effects on the player sprite
-        Texture2D bombImage;                    // image of the bomb
         public static Texture2D bulletImage;    // image of the bullet
         public static Texture2D horizonImage;   // image of horizon enemy
         public static Texture2D verticianImage; // image of vertician enemy
@@ -36,12 +35,20 @@ namespace _2DGame
         public static Texture2D chaserImage;    // image of chaser enemy
         GraphicsDeviceManager graphics;         // graphical options 
         SpriteBatch spriteBatch;                // sprites to display
-        int score;                              // current player score
-        int bombCount;                          // current # of bombs
-        int time;                               // time left
         public List<AISprite> enemies;          // list of enemies
-        public List<AISprite> powerups;         // list of powerups
         SoundEffect backgroundTheme;            // background music
+        SpriteFont scoreFont;                   // Desired font
+        Vector2 scoreLoc;                       // Location of score
+        int score;                              // current player score
+        SpriteFont timeFont;                    // font for timer
+        Vector2 timeLoc;                        // location of time
+        int time;                               // time remaining
+        SpriteFont winLoseFont;                 // font for the Win/Lose Message
+        Vector2 winLoc;                         // win location
+        Vector2 loseLoc;                        // lose location
+        Boolean hasWon;                         // whether or not the player won
+        Boolean hasLost;                        // whether or not the player has lost
+        Boolean decrementTime;                  // whether or not to decrement time
 
         public ArcadeShooter()
         {
@@ -62,7 +69,6 @@ namespace _2DGame
         {
             player = new Player();
             enemies = new List<AISprite>();
-            powerups = new List<AISprite>();
             base.Initialize();
         }
 
@@ -84,12 +90,23 @@ namespace _2DGame
             verticianImage = Content.Load<Texture2D>("Vertician");
             fleelerImage = Content.Load<Texture2D>("Fleeler");
             chaserImage = Content.Load<Texture2D>("Chaser");
-            bombImage = Content.Load<Texture2D>("Bomb");
             // Other Loads
             origin = new Vector2(playerImage.Width / 2, playerImage.Height / 2);
             playerEffect = SpriteEffects.None;
             player.bulletSound = Content.Load<SoundEffect>("Laser");
             backgroundTheme = Content.Load<SoundEffect>("base2");
+            scoreFont = Content.Load<SpriteFont>("scoreFont");
+            scoreLoc = new Vector2(10, 20);
+            score = 0;
+            timeFont = Content.Load<SpriteFont>("timeFont");
+            timeLoc = new Vector2(10, 40);
+            time = 3000;
+            decrementTime = true;
+            winLoseFont = Content.Load<SpriteFont>("winLoseFont");
+            winLoc = new Vector2(width/2 - 175, height/4);
+            loseLoc = new Vector2(0, 0);
+            hasWon = false;
+            hasLost = false;
             // Plays background music
             SoundEffectInstance loopBG = backgroundTheme.CreateInstance();
             loopBG.IsLooped = true;
@@ -121,15 +138,20 @@ namespace _2DGame
             player.updatePlayer();           // Moves, Rotates, and Fires
             moveAISprites(enemies);          // Moves existing enemies
             moveAISprites(player.bullets);   // Moves existing bullets
-            moveAISprites(powerups);
 
             // Garbage Collection
             removeOOB(player.bullets);       // Removes any OOB bullets
             removeOOB(enemies);              // Removes any OOB enemies
-            removeOOB(powerups);             // Removes any OOB powerups
 
             // Check Collisions
             checkMultipleCollisions(player.bullets, enemies);
+
+            // Decrease time every second
+            if (decrementTime)
+            { time -= 1; }
+            // Check if the player won/lost
+            checkWin();
+            checkLose();
 
             base.Update(gameTime);
         }
@@ -143,16 +165,22 @@ namespace _2DGame
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-
+            // Draw Win
+            drawWin(spriteBatch);
+            // Check Lose
+            drawLose(spriteBatch);
             // Draw Player
             spriteBatch.Draw(playerImage, player.location, null, Color.White, player.rotation, origin, 1f, playerEffect, 0); 
             // Draw bullets, enemies and powerups
             displayAISprites(player.bullets); 
             displayAISprites(enemies);
-            displayAISprites(powerups); 
             // Draw Reticle
             spriteBatch.Draw(reticle, player.reticleLoc, Color.White);
-            
+            // Draw Score
+            spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), scoreLoc, Color.White);
+            // Draw Timer
+            spriteBatch.DrawString(timeFont, "Time Remaining: " + (time/100).ToString(), timeLoc, Color.White);
+
             spriteBatch.End(); 
 
             base.Draw(gameTime);
@@ -217,7 +245,7 @@ namespace _2DGame
             enemies.Add(chase3); 
         }
 
-        // ESC Button Pressed
+        // Quit the game if the escape button is pressed
         protected void escPressed(KeyboardState ks)
         {
             if (ks.IsKeyDown(Keys.Escape))
@@ -235,17 +263,40 @@ namespace _2DGame
             {
                 if (list1[i].checkSingleCollision(list2))
                 {
+                    score += 1000;
                     list1.Remove(list1[i]);
                 }
             }
         }
 
-        // If the player is hit by an enemy, something(?) happens
-        protected void checkPlayerCollision(List<AISprite> list)
+        // Check if the player defeated all enemies in the level
+        protected void checkWin()
         {
-            if (player.playerCollideEnemy(list))
+            hasWon = (enemies.Count == 0);
+        }
+
+        // Check if the player has run out of time or gotten hit.
+        protected void checkLose()
+        {
+            hasLost = (player.collideEnemy(enemies) || time <= 0);
+        }
+
+        // Display the Win announcement if the player wins
+        protected void drawWin(SpriteBatch sb)
+        {
+            if (hasWon)
             {
-                // Pause game/lose life/close game?
+                decrementTime = false;
+                sb.DrawString(winLoseFont, "You've Won!", winLoc, Color.White);
+            }
+        }
+
+        // Check if the player lost, either by running out of time, or getting hit.
+        protected void drawLose(SpriteBatch sb)
+        {
+            if (hasLost) 
+            {
+                sb.DrawString(winLoseFont, "Out of time! Game Over", loseLoc, Color.White);
             }
         }
     }

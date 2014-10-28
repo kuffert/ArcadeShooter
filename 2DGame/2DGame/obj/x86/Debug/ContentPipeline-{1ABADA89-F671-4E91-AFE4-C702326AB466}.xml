@@ -82,6 +82,51 @@
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Laser.xnb</Output>
       <Time>2014-10-09T13:33:43.8061712-04:00</Time>
     </Item>
+    <Item>
+      <Source>success.wav</Source>
+      <Name>success</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\success.xnb</Output>
+      <Time>2014-10-21T11:39:02.09114-04:00</Time>
+    </Item>
+    <Item>
+      <Source>base2.wav</Source>
+      <Name>base2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\base2.xnb</Output>
+      <Time>2014-10-21T11:39:02.0751391-04:00</Time>
+    </Item>
+    <Item>
+      <Source>scoreFont.spritefont</Source>
+      <Name>scoreFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\scoreFont.xnb</Output>
+      <Time>2014-10-21T12:37:14.2545956-04:00</Time>
+    </Item>
+    <Item>
+      <Source>timeFont.spritefont</Source>
+      <Name>timeFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\timeFont.xnb</Output>
+      <Time>2014-10-21T12:37:28.931435-04:00</Time>
+    </Item>
+    <Item>
+      <Source>winLoseFont.spritefont</Source>
+      <Name>winLoseFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\winLoseFont.xnb</Output>
+      <Time>2014-10-21T12:41:26.4680214-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{1ABADA89-F671-4E91-AFE4-C702326AB466}</ContentProjectGUID>

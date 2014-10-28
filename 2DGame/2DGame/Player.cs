@@ -88,13 +88,14 @@ namespace _2DGame
 
         // Checks if the player collided with anything on a list of sprites.
         // This can be used for powerups or enemies.
-        public Boolean playerCollideEnemy(List<AISprite> list)
+        public Boolean collideEnemy(List<AISprite> list)
         {
             Vector2 dist = new Vector2(100, 100);
             for (int i = 0; i < list.Count; i++)
             {
-                dist = this.location - list[i].location;
-                if (Math.Abs(dist.X) < 25 && Math.Abs(dist.Y) < 25)
+                Vector2 offset = new Vector2(image.Width / 2, image.Height / 2);
+                dist = this.location-offset - list[i].location;
+                if (Math.Abs(dist.X) <50 && Math.Abs(dist.Y) < 50)
                 {
                     return true;
                 }

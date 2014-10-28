@@ -9,3 +9,6 @@ Content\Bomb.xnb
 Content\Laser.xnb
 Content\success.xnb
 Content\base2.xnb
+Content\scoreFont.xnb
+Content\timeFont.xnb
+Content\winLoseFont.xnb
