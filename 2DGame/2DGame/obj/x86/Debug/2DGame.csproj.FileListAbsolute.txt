@@ -42,3 +42,8 @@ C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\
 C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\scoreFont.xnb
 C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\timeFont.xnb
 C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\winLoseFont.xnb
+C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\scoreFont.xnb
+C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\timeFont.xnb
+C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\winLoseFont.xnb
+C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\intro.xnb
+C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\introPlayer.xnb

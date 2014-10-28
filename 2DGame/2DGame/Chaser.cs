@@ -28,8 +28,7 @@ namespace _2DGame
         // Moves the Chaser enemy
         public override void moveAISprite()
         {
-            Vector2 offset = new Vector2(ArcadeShooter.player.image.Width/2, ArcadeShooter.player.image.Height/2);
-            Vector2 travelVector = ArcadeShooter.player.location - offset - this.location;
+            Vector2 travelVector = ArcadeShooter.player.location - ArcadeShooter.playerCenter - this.location;
             travelVector.Normalize();
             location.X += travelVector.X * speed;
             location.Y += travelVector.Y * speed;

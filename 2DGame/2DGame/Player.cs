@@ -32,7 +32,7 @@ namespace _2DGame
         // Player Constructor
         public Player()
         {
-            location = new Vector2(ArcadeShooter.width/2, ArcadeShooter.height/2);
+            location = ArcadeShooter.origin;
             reticleLoc = new Vector2(750, 500);  
             bullets = new List<AISprite>();
             vel = 10f;
@@ -63,8 +63,8 @@ namespace _2DGame
         // Fires a bullet, adding it to the list of fired bullets.
         public void fireBullet(MouseState ms, Vector2 start, Vector2 end)
         {
-            Vector2 offsetStart = new Vector2(start.X - image.Width / 2, start.Y - image.Height / 2);
-            Vector2 offsetEnd = new Vector2(end.X - retImage.Width / 2, end.Y - retImage.Height / 2);
+            Vector2 offsetStart = start - ArcadeShooter.playerCenter;
+            Vector2 offsetEnd = end - ArcadeShooter.playerCenter;
             if (ms.LeftButton == ButtonState.Pressed && counter%5 == 0)
             {
                 Bullet b = new Bullet(offsetStart, offsetEnd);

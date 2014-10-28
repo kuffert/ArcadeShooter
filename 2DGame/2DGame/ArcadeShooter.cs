@@ -26,17 +26,21 @@ namespace _2DGame
         public static int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
         Texture2D playerImage;                  // image of the player
         Texture2D reticle;                      // image of the reticle
-        static Vector2 origin;                  // origin of player image
+        public static Vector2 playerCenter;     // origin of player image
+        public static Vector2 origin;           // center of the screen
         SpriteEffects playerEffect;             // effects on the player sprite
         public static Texture2D bulletImage;    // image of the bullet
         public static Texture2D horizonImage;   // image of horizon enemy
         public static Texture2D verticianImage; // image of vertician enemy
         public static Texture2D fleelerImage;   // image of fleeler enemy
         public static Texture2D chaserImage;    // image of chaser enemy
+        protected Texture2D introImage;         // first intro screen
+        protected Texture2D intro2Image;        // second intro screen
         GraphicsDeviceManager graphics;         // graphical options 
         SpriteBatch spriteBatch;                // sprites to display
         public List<AISprite> enemies;          // list of enemies
         SoundEffect backgroundTheme;            // background music
+        SoundEffect successSound;               // Sound that plays when you win
         SpriteFont scoreFont;                   // Desired font
         Vector2 scoreLoc;                       // Location of score
         int score;                              // current player score
@@ -49,6 +53,10 @@ namespace _2DGame
         Boolean hasWon;                         // whether or not the player won
         Boolean hasLost;                        // whether or not the player has lost
         Boolean decrementTime;                  // whether or not to decrement time
+        public string loseMessage;              // the lose message to be displayed to the player
+        bool canMove;                           // boolean determines if anything on the screen can move
+        bool intro1;                            // bool to start/end the intro1
+        bool intro2;                            // bool to start/end the intro2  
 
         public ArcadeShooter()
         {
@@ -56,6 +64,7 @@ namespace _2DGame
             graphics.PreferredBackBufferHeight = height;  // Sets the window height
             graphics.PreferredBackBufferWidth = width;    // Sets the window width
             graphics.IsFullScreen = true;
+            origin = new Vector2(ArcadeShooter.width / 2, ArcadeShooter.height / 2);
             Content.RootDirectory = "Content";
         }
 
@@ -80,6 +89,7 @@ namespace _2DGame
         {
             // Load Sprite Batch
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
             // Load Images
             playerImage = Content.Load<Texture2D>("playerShip");
             player.image = playerImage;
@@ -90,29 +100,39 @@ namespace _2DGame
             verticianImage = Content.Load<Texture2D>("Vertician");
             fleelerImage = Content.Load<Texture2D>("Fleeler");
             chaserImage = Content.Load<Texture2D>("Chaser");
-            // Other Loads
-            origin = new Vector2(playerImage.Width / 2, playerImage.Height / 2);
+            introImage = Content.Load<Texture2D>("introPlayer");
+            intro2Image = Content.Load<Texture2D>("intro");
             playerEffect = SpriteEffects.None;
-            player.bulletSound = Content.Load<SoundEffect>("Laser");
-            backgroundTheme = Content.Load<SoundEffect>("base2");
-            scoreFont = Content.Load<SpriteFont>("scoreFont");
+
+            // Load locations
+            playerCenter = new Vector2(playerImage.Width / 2, playerImage.Height / 2);
             scoreLoc = new Vector2(10, 20);
-            score = 0;
-            timeFont = Content.Load<SpriteFont>("timeFont");
             timeLoc = new Vector2(10, 40);
-            time = 3000;
-            decrementTime = true;
+            winLoc = new Vector2(width / 2 - 175, height / 4);
+            loseLoc = new Vector2(width / 2 - 425, height / 4);
+
+            // Fonts
+            scoreFont = Content.Load<SpriteFont>("scoreFont");
             winLoseFont = Content.Load<SpriteFont>("winLoseFont");
-            winLoc = new Vector2(width/2 - 175, height/4);
-            loseLoc = new Vector2(0, 0);
+            timeFont = Content.Load<SpriteFont>("timeFont");
+
+            // Boolean and counter loads
+            score = 0;
+            time = 3000;
+            decrementTime = false;
             hasWon = false;
             hasLost = false;
-            // Plays background music
+            canMove = false;
+            intro1 = true;
+            intro2 = false;
+
+            // Sound loads
+            player.bulletSound = Content.Load<SoundEffect>("Laser");
+            backgroundTheme = Content.Load<SoundEffect>("base2");
+            successSound = Content.Load<SoundEffect>("success");
             SoundEffectInstance loopBG = backgroundTheme.CreateInstance();
             loopBG.IsLooped = true;
             loopBG.Play();
-            // Loads the enemies on the level
-            levelOne();
         }
 
         /// <summary>
@@ -132,12 +152,17 @@ namespace _2DGame
         {
             // Allows the game to exit
             KeyboardState ks = Keyboard.GetState();
+            updateIntro(ks);
             escPressed(ks);
+            restartLevelOne(ks);
 
-            // Updates Objects in the gameworld
-            player.updatePlayer();           // Moves, Rotates, and Fires
-            moveAISprites(enemies);          // Moves existing enemies
-            moveAISprites(player.bullets);   // Moves existing bullets
+            // Updates Objects in the gameworld (if they are currently allowed to)
+            if (canMove)
+            {
+                player.updatePlayer();           // Moves, Rotates, and Fires
+                moveAISprites(enemies);          // Moves existing enemies
+                moveAISprites(player.bullets);   // Moves existing bullets
+            }
 
             // Garbage Collection
             removeOOB(player.bullets);       // Removes any OOB bullets
@@ -149,6 +174,7 @@ namespace _2DGame
             // Decrease time every second
             if (decrementTime)
             { time -= 1; }
+
             // Check if the player won/lost
             checkWin();
             checkLose();
@@ -165,23 +191,26 @@ namespace _2DGame
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+
+            //Draw Intro
+            drawIntro(spriteBatch);
             // Draw Win
             drawWin(spriteBatch);
             // Check Lose
             drawLose(spriteBatch);
             // Draw Player
-            spriteBatch.Draw(playerImage, player.location, null, Color.White, player.rotation, origin, 1f, playerEffect, 0); 
+            spriteBatch.Draw(playerImage, player.location, null, Color.White, player.rotation, playerCenter, 1f, playerEffect, 0);
             // Draw bullets, enemies and powerups
-            displayAISprites(player.bullets); 
+            displayAISprites(player.bullets);
             displayAISprites(enemies);
             // Draw Reticle
             spriteBatch.Draw(reticle, player.reticleLoc, Color.White);
             // Draw Score
             spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), scoreLoc, Color.White);
             // Draw Timer
-            spriteBatch.DrawString(timeFont, "Time Remaining: " + (time/100).ToString(), timeLoc, Color.White);
+            spriteBatch.DrawString(timeFont, "Time Remaining: " + (time / 100).ToString(), timeLoc, Color.White);
 
-            spriteBatch.End(); 
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -191,8 +220,8 @@ namespace _2DGame
         protected void displayAISprites(List<AISprite> sprites)
         {
             for (int i = 0; i < sprites.Count; i++)
-            { 
-                spriteBatch.Draw(sprites[i].image, sprites[i].location, Color.White); 
+            {
+                spriteBatch.Draw(sprites[i].image, sprites[i].location, Color.White);
             }
         }
 
@@ -201,8 +230,8 @@ namespace _2DGame
         protected void moveAISprites(List<AISprite> sprites)
         {
             for (int i = 0; i < sprites.Count; i++)
-            { 
-                sprites[i].moveAISprite(); 
+            {
+                sprites[i].moveAISprite();
             }
         }
 
@@ -222,27 +251,35 @@ namespace _2DGame
         protected void levelOne()
         {
             AISprite horiz1 = new Horizon(new Vector2(0, 0), 1);
-            AISprite horiz2 = new Horizon(new Vector2(500, width/16), -1);
-            AISprite horiz3 = new Horizon(new Vector2(height-200, width/16*2), 1);
-            AISprite horiz4 = new Horizon(new Vector2(height-100, width/16*3), -1);
+            AISprite horiz2 = new Horizon(new Vector2(500, width / 16), -1);
+            AISprite horiz3 = new Horizon(new Vector2(height - 200, width / 16 * 2), 1);
+            AISprite horiz4 = new Horizon(new Vector2(height - 100, width / 16 * 3), -1);
             AISprite verti1 = new Vertician(new Vector2(width / 8, 0), -1);
-            AISprite verti2 = new Vertician(new Vector2(width / 8*2, 400), 1);
-            AISprite verti3 = new Vertician(new Vector2(width /8*7, 0), -1);
-            AISprite verti4 = new Vertician(new Vector2(width / 8*6, 400), 1);
+            AISprite verti2 = new Vertician(new Vector2(width / 8 * 2, 400), 1);
+            AISprite verti3 = new Vertician(new Vector2(width / 8 * 7, 0), -1);
+            AISprite verti4 = new Vertician(new Vector2(width / 8 * 6, 400), 1);
             AISprite chase1 = new Chaser(new Vector2(50, 100));
             AISprite chase2 = new Chaser(new Vector2(1600, 500));
             AISprite chase3 = new Chaser(new Vector2(ArcadeShooter.width / 2, 1000));
-            enemies.Add(horiz1); 
-            enemies.Add(horiz2); 
-            enemies.Add(horiz3); 
-            enemies.Add(horiz4); 
+            AISprite fleel1 = new Fleeler(new Vector2(ArcadeShooter.width / 4, 600));
+            AISprite fleel2 = new Fleeler(new Vector2(ArcadeShooter.width / 4 * 3, 600));
+            AISprite fleel3 = new Fleeler(new Vector2(ArcadeShooter.width / 4, 300));
+            AISprite fleel4 = new Fleeler(new Vector2(ArcadeShooter.width / 4 * 3, 300));
+            enemies.Add(horiz1);
+            enemies.Add(horiz2);
+            enemies.Add(horiz3);
+            enemies.Add(horiz4);
             enemies.Add(verti1);
             enemies.Add(verti2);
             enemies.Add(verti3);
             enemies.Add(verti4);
-            enemies.Add(chase1); 
-            enemies.Add(chase2); 
-            enemies.Add(chase3); 
+            enemies.Add(chase1);
+            enemies.Add(chase2);
+            enemies.Add(chase3);
+            enemies.Add(fleel1);
+            enemies.Add(fleel2);
+            enemies.Add(fleel3);
+            enemies.Add(fleel4);
         }
 
         // Quit the game if the escape button is pressed
@@ -272,13 +309,24 @@ namespace _2DGame
         // Check if the player defeated all enemies in the level
         protected void checkWin()
         {
-            hasWon = (enemies.Count == 0);
+            hasWon = (enemies.Count == 0 && !intro1 && !intro2);
         }
 
         // Check if the player has run out of time or gotten hit.
         protected void checkLose()
         {
-            hasLost = (player.collideEnemy(enemies) || time <= 0);
+            if (player.collideEnemy(enemies))
+            {
+                canMove = false;
+                hasLost = true;
+                loseMessage = "You have been hit! Game over.";
+            }
+            if (time <= 0)
+            {
+                canMove = false;
+                hasLost = true;
+                loseMessage = "Ran out of time! Game over.";
+            }
         }
 
         // Display the Win announcement if the player wins
@@ -294,9 +342,50 @@ namespace _2DGame
         // Check if the player lost, either by running out of time, or getting hit.
         protected void drawLose(SpriteBatch sb)
         {
-            if (hasLost) 
+            if (hasLost)
             {
-                sb.DrawString(winLoseFont, "Out of time! Game Over", loseLoc, Color.White);
+                decrementTime = false;
+                sb.DrawString(winLoseFont, loseMessage, loseLoc, Color.White);
+            }
+        }
+
+        // restart the game if the player decides to
+        protected void restartLevelOne(KeyboardState ks)
+        {
+            if ((hasWon || hasLost) && ks.IsKeyDown(Keys.R))
+            {
+                player.location = origin;
+                canMove = true;
+                enemies.Clear();
+                decrementTime = true;
+                hasLost = false;
+                hasWon = false;
+                levelOne();
+                time = 3000;
+            }
+        }
+
+        // draw the game intro
+        protected void drawIntro(SpriteBatch sb)
+        {
+            if (intro1) { sb.Draw(introImage, origin - new Vector2(introImage.Width / 2, introImage.Height / 2), Color.White); }
+            if (intro2) { sb.Draw(intro2Image, origin - new Vector2(intro2Image.Width / 2, intro2Image.Height / 2), Color.White); }
+        }
+
+        // update intro
+        protected void updateIntro(KeyboardState ks)
+        {
+            if (intro1 && ks.IsKeyDown(Keys.Space))
+            {
+                intro1 = false;
+                intro2 = true;
+            }
+            if (intro2 && ks.IsKeyDown(Keys.Enter))
+            {
+                intro2 = false;
+                canMove = true;
+                decrementTime = true;
+                levelOne(); // starts level one
             }
         }
     }
