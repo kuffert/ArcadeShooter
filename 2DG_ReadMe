@@ -29,16 +29,16 @@ Implemented:
 
 - Implement Chaser enemy (follows player)
 
-
-TODO:
-
 - Implement Fleeler enemy (avoids player)
-
 
 - Score
 
 - Time
 
 - Win/Lose
+
+TODO:
+
+- Fix intro image layers
 
 - More than one level
