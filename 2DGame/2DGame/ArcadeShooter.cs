@@ -39,11 +39,13 @@ namespace _2DGame
         GraphicsDeviceManager graphics;         // graphical options 
         SpriteBatch spriteBatch;                // sprites to display
         public List<AISprite> enemies;          // list of enemies
+        private List<Level> levels;             // list of levels
         SoundEffect backgroundTheme;            // background music
         SoundEffect successSound;               // Sound that plays when you win
         SpriteFont scoreFont;                   // Desired font
         Vector2 scoreLoc;                       // Location of score
         int score;                              // current player score
+        int points;                             // number of points obtained per kill
         SpriteFont timeFont;                    // font for timer
         Vector2 timeLoc;                        // location of time
         int time;                               // time remaining
@@ -56,7 +58,8 @@ namespace _2DGame
         public string loseMessage;              // the lose message to be displayed to the player
         bool canMove;                           // boolean determines if anything on the screen can move
         bool intro1;                            // bool to start/end the intro1
-        bool intro2;                            // bool to start/end the intro2  
+        bool intro2;                            // bool to start/end the intro2
+        int curLevel;                           // current level #
 
         public ArcadeShooter()
         {
@@ -78,6 +81,7 @@ namespace _2DGame
         {
             player = new Player();
             enemies = new List<AISprite>();
+            levels = new List<Level>();
             base.Initialize();
         }
 
@@ -91,6 +95,8 @@ namespace _2DGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load Images
+            introImage = Content.Load<Texture2D>("introPlayer");
+            intro2Image = Content.Load<Texture2D>("intro");
             playerImage = Content.Load<Texture2D>("playerShip");
             player.image = playerImage;
             reticle = Content.Load<Texture2D>("Reticle");
@@ -100,8 +106,6 @@ namespace _2DGame
             verticianImage = Content.Load<Texture2D>("Vertician");
             fleelerImage = Content.Load<Texture2D>("Fleeler");
             chaserImage = Content.Load<Texture2D>("Chaser");
-            introImage = Content.Load<Texture2D>("introPlayer");
-            intro2Image = Content.Load<Texture2D>("intro");
             playerEffect = SpriteEffects.None;
 
             // Load locations
@@ -118,6 +122,7 @@ namespace _2DGame
 
             // Boolean and counter loads
             score = 0;
+            points = 100;
             time = 3000;
             decrementTime = false;
             hasWon = false;
@@ -125,6 +130,7 @@ namespace _2DGame
             canMove = false;
             intro1 = true;
             intro2 = false;
+            curLevel = -1;
 
             // Sound loads
             player.bulletSound = Content.Load<SoundEffect>("Laser");
@@ -133,6 +139,10 @@ namespace _2DGame
             SoundEffectInstance loopBG = backgroundTheme.CreateInstance();
             loopBG.IsLooped = true;
             loopBG.Play();
+
+            // Load Levels
+            levels.Add(Level.buildLevelOne());
+            levels.Add(Level.buildLevelTwo());
         }
 
         /// <summary>
@@ -150,11 +160,13 @@ namespace _2DGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
+            // Checks key input methods
             KeyboardState ks = Keyboard.GetState();
             updateIntro(ks);
             escPressed(ks);
-            restartLevelOne(ks);
+            nextLevel(ks);
+            restartLevel(ks);
+            
 
             // Updates Objects in the gameworld (if they are currently allowed to)
             if (canMove)
@@ -215,7 +227,7 @@ namespace _2DGame
             base.Draw(gameTime);
         }
 
-        // When a passed in a list of AISprites (bullets, enemies, powerups)
+        // When a passed in a list of AISprites (bullets, enemies)
         // This function will display each one's corresponding image.
         protected void displayAISprites(List<AISprite> sprites)
         {
@@ -247,41 +259,6 @@ namespace _2DGame
             }
         }
 
-        // Initializes level one
-        protected void levelOne()
-        {
-            AISprite horiz1 = new Horizon(new Vector2(0, 0), 1);
-            AISprite horiz2 = new Horizon(new Vector2(500, width / 16), -1);
-            AISprite horiz3 = new Horizon(new Vector2(height - 200, width / 16 * 2), 1);
-            AISprite horiz4 = new Horizon(new Vector2(height - 100, width / 16 * 3), -1);
-            AISprite verti1 = new Vertician(new Vector2(width / 8, 0), -1);
-            AISprite verti2 = new Vertician(new Vector2(width / 8 * 2, 400), 1);
-            AISprite verti3 = new Vertician(new Vector2(width / 8 * 7, 0), -1);
-            AISprite verti4 = new Vertician(new Vector2(width / 8 * 6, 400), 1);
-            AISprite chase1 = new Chaser(new Vector2(50, 100));
-            AISprite chase2 = new Chaser(new Vector2(1600, 500));
-            AISprite chase3 = new Chaser(new Vector2(ArcadeShooter.width / 2, 1000));
-            AISprite fleel1 = new Fleeler(new Vector2(ArcadeShooter.width / 4, 600));
-            AISprite fleel2 = new Fleeler(new Vector2(ArcadeShooter.width / 4 * 3, 600));
-            AISprite fleel3 = new Fleeler(new Vector2(ArcadeShooter.width / 4, 300));
-            AISprite fleel4 = new Fleeler(new Vector2(ArcadeShooter.width / 4 * 3, 300));
-            enemies.Add(horiz1);
-            enemies.Add(horiz2);
-            enemies.Add(horiz3);
-            enemies.Add(horiz4);
-            enemies.Add(verti1);
-            enemies.Add(verti2);
-            enemies.Add(verti3);
-            enemies.Add(verti4);
-            enemies.Add(chase1);
-            enemies.Add(chase2);
-            enemies.Add(chase3);
-            enemies.Add(fleel1);
-            enemies.Add(fleel2);
-            enemies.Add(fleel3);
-            enemies.Add(fleel4);
-        }
-
         // Quit the game if the escape button is pressed
         protected void escPressed(KeyboardState ks)
         {
@@ -300,7 +277,7 @@ namespace _2DGame
             {
                 if (list1[i].checkSingleCollision(list2))
                 {
-                    score += 1000;
+                    score += points;
                     list1.Remove(list1[i]);
                 }
             }
@@ -350,7 +327,7 @@ namespace _2DGame
         }
 
         // restart the game if the player decides to
-        protected void restartLevelOne(KeyboardState ks)
+        protected void restartLevel(KeyboardState ks)
         {
             if ((hasWon || hasLost) && ks.IsKeyDown(Keys.R))
             {
@@ -360,7 +337,7 @@ namespace _2DGame
                 decrementTime = true;
                 hasLost = false;
                 hasWon = false;
-                levelOne();
+                // Need to reset the enemies now
                 time = 3000;
             }
         }
@@ -385,8 +362,29 @@ namespace _2DGame
                 intro2 = false;
                 canMove = true;
                 decrementTime = true;
-                levelOne(); // starts level one
+                updateLevel();
             }
+        }
+
+        // If the player has won a level, allow them to proceed to the next by pressing 
+        // space
+        protected void nextLevel(KeyboardState ks)
+        {
+            if (hasWon && ks.IsKeyDown(Keys.Space))
+            {
+                hasWon = false;
+                updateLevel();
+            }
+        }
+
+        // Updates the current level when called, loading a new list of enemies
+        protected void updateLevel()
+        {
+            curLevel++;
+            if (curLevel < 0) { return; }
+            if (levels.Count <= curLevel) { return; }
+            enemies = levels[curLevel].enemies;
+            points += levels[curLevel].scoreMod;
         }
     }
 }
