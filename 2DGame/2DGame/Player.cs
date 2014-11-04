@@ -32,8 +32,8 @@ namespace _2DGame
         // Player Constructor
         public Player()
         {
-            location = ArcadeShooter.origin;
-            reticleLoc = new Vector2(750, 500);  
+            location = new Vector2(-50, -50);
+            reticleLoc = new Vector2(ArcadeShooter.width / 2, ArcadeShooter.height + 100);  
             bullets = new List<AISprite>();
             vel = 10f;
         }

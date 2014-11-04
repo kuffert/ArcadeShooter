@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\playerShip.xnb</Output>
-      <Time>2014-10-09T13:33:43.8531739-04:00</Time>
+      <Time>2014-10-30T13:36:47.6242483-04:00</Time>
     </Item>
     <Item>
       <Source>Horizon.bmp</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Horizon.xnb</Output>
-      <Time>2014-10-09T13:33:43.7981707-04:00</Time>
+      <Time>2014-10-30T13:36:47.5192423-04:00</Time>
     </Item>
     <Item>
       <Source>Chaser.bmp</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Chaser.xnb</Output>
-      <Time>2014-10-09T13:33:43.7821698-04:00</Time>
+      <Time>2014-10-30T13:36:47.5162421-04:00</Time>
     </Item>
     <Item>
       <Source>Fleeler.bmp</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Fleeler.xnb</Output>
-      <Time>2014-10-09T13:33:43.7901703-04:00</Time>
+      <Time>2014-10-30T13:36:47.5182422-04:00</Time>
     </Item>
     <Item>
       <Source>Vertician.bmp</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Vertician.xnb</Output>
-      <Time>2014-10-09T13:33:43.820172-04:00</Time>
+      <Time>2014-10-30T13:36:47.5252426-04:00</Time>
     </Item>
     <Item>
       <Source>Reticle.bmp</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Reticle.xnb</Output>
-      <Time>2014-10-09T13:33:43.8121715-04:00</Time>
+      <Time>2014-10-30T13:36:47.5232425-04:00</Time>
     </Item>
     <Item>
       <Source>Bullet.bmp</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Bullet.xnb</Output>
-      <Time>2014-10-09T13:33:43.7741693-04:00</Time>
+      <Time>2014-10-30T13:36:47.4742397-04:00</Time>
     </Item>
     <Item>
       <Source>Bomb.bmp</Source>
@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Bomb.xnb</Output>
-      <Time>2014-10-09T13:33:43.7551683-04:00</Time>
+      <Time>2014-10-30T13:36:47.4732397-04:00</Time>
     </Item>
     <Item>
       <Source>Laser.wav</Source>
@@ -80,7 +80,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Laser.xnb</Output>
-      <Time>2014-10-09T13:33:43.8061712-04:00</Time>
+      <Time>2014-10-30T13:36:47.5212424-04:00</Time>
     </Item>
     <Item>
       <Source>success.wav</Source>
@@ -89,7 +89,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\success.xnb</Output>
-      <Time>2014-10-21T11:39:02.09114-04:00</Time>
+      <Time>2014-10-30T13:36:47.6292486-04:00</Time>
     </Item>
     <Item>
       <Source>base2.wav</Source>
@@ -98,7 +98,7 @@
       <Processor>SoundEffectProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\base2.xnb</Output>
-      <Time>2014-10-21T11:39:02.0751391-04:00</Time>
+      <Time>2014-10-30T13:36:47.5762456-04:00</Time>
     </Item>
     <Item>
       <Source>scoreFont.spritefont</Source>
@@ -107,7 +107,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\scoreFont.xnb</Output>
-      <Time>2014-10-21T12:37:14.2545956-04:00</Time>
+      <Time>2014-10-30T13:36:47.6262484-04:00</Time>
     </Item>
     <Item>
       <Source>timeFont.spritefont</Source>
@@ -116,7 +116,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\timeFont.xnb</Output>
-      <Time>2014-10-21T12:37:28.931435-04:00</Time>
+      <Time>2014-10-30T13:36:47.6302487-04:00</Time>
     </Item>
     <Item>
       <Source>winLoseFont.spritefont</Source>
@@ -125,7 +125,25 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\winLoseFont.xnb</Output>
-      <Time>2014-10-21T12:41:26.4680214-04:00</Time>
+      <Time>2014-10-30T13:36:47.6322488-04:00</Time>
+    </Item>
+    <Item>
+      <Source>intro.png</Source>
+      <Name>intro</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\intro.xnb</Output>
+      <Time>2014-10-30T13:36:47.5792457-04:00</Time>
+    </Item>
+    <Item>
+      <Source>introPlayer.png</Source>
+      <Name>introPlayer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Christopher\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\introPlayer.xnb</Output>
+      <Time>2014-10-30T13:36:47.5812458-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

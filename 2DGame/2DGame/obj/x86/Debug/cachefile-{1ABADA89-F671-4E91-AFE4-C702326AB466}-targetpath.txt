@@ -6,11 +6,11 @@ Content\Vertician.xnb
 Content\Reticle.xnb
 Content\Bullet.xnb
 Content\Bomb.xnb
+Content\intro.xnb
+Content\introPlayer.xnb
 Content\Laser.xnb
 Content\success.xnb
 Content\base2.xnb
 Content\scoreFont.xnb
 Content\timeFont.xnb
 Content\winLoseFont.xnb
-Content\intro.xnb
-Content\introPlayer.xnb

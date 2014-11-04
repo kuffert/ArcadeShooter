@@ -21,14 +21,17 @@ namespace _2DGame
     /// </summary>
     public class ArcadeShooter : Microsoft.Xna.Framework.Game
     {
+        // Game neccessities
         public static Player player;            // The player
         public static int width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
         public static int height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-        Texture2D playerImage;                  // image of the player
-        Texture2D reticle;                      // image of the reticle
-        public static Vector2 playerCenter;     // origin of player image
-        public static Vector2 origin;           // center of the screen
-        SpriteEffects playerEffect;             // effects on the player sprite
+        public List<AISprite> enemies;          // list of enemies
+        private List<Level> levels;             // list of levels
+
+        // Images
+        SpriteBatch spriteBatch;                // sprites to display
+        public static Texture2D playerImage;    // image of the player
+        public static Texture2D reticle;        // image of the reticle
         public static Texture2D bulletImage;    // image of the bullet
         public static Texture2D horizonImage;   // image of horizon enemy
         public static Texture2D verticianImage; // image of vertician enemy
@@ -36,22 +39,26 @@ namespace _2DGame
         public static Texture2D chaserImage;    // image of chaser enemy
         protected Texture2D introImage;         // first intro screen
         protected Texture2D intro2Image;        // second intro screen
+        public static Vector2 playerCenter;     // origin of player image
+        public static Vector2 origin;           // center of the screen
+        SpriteEffects playerEffect;             // effects on the player sprite
         GraphicsDeviceManager graphics;         // graphical options 
-        SpriteBatch spriteBatch;                // sprites to display
-        public List<AISprite> enemies;          // list of enemies
-        private List<Level> levels;             // list of levels
-        SoundEffect backgroundTheme;            // background music
-        SoundEffect successSound;               // Sound that plays when you win
-        SpriteFont scoreFont;                   // Desired font
+
+        // Locations
         Vector2 scoreLoc;                       // Location of score
-        int score;                              // current player score
-        int points;                             // number of points obtained per kill
-        SpriteFont timeFont;                    // font for timer
         Vector2 timeLoc;                        // location of time
-        int time;                               // time remaining
-        SpriteFont winLoseFont;                 // font for the Win/Lose Message
         Vector2 winLoc;                         // win location
         Vector2 loseLoc;                        // lose location
+
+        // Fonts
+        SpriteFont scoreFont;                   // Desired font
+        SpriteFont timeFont;                    // font for timer
+        SpriteFont winLoseFont;                 // font for the Win/Lose Message 
+
+        // Variables
+        int score;                              // current player score
+        int points;                             // number of points obtained per kill
+        int time;                               // time remaining
         Boolean hasWon;                         // whether or not the player won
         Boolean hasLost;                        // whether or not the player has lost
         Boolean decrementTime;                  // whether or not to decrement time
@@ -60,7 +67,13 @@ namespace _2DGame
         bool intro1;                            // bool to start/end the intro1
         bool intro2;                            // bool to start/end the intro2
         int curLevel;                           // current level #
+        private static int maxLevels;           // Maximum number of levels   
 
+        // Sounds
+        SoundEffect backgroundTheme;            // background music
+        SoundEffect successSound;               // Sound that plays when you win
+
+        // Constructor for the game world
         public ArcadeShooter()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -131,6 +144,7 @@ namespace _2DGame
             intro1 = true;
             intro2 = false;
             curLevel = -1;
+            maxLevels = 3;
 
             // Sound loads
             player.bulletSound = Content.Load<SoundEffect>("Laser");
@@ -143,6 +157,7 @@ namespace _2DGame
             // Load Levels
             levels.Add(Level.buildLevelOne());
             levels.Add(Level.buildLevelTwo());
+            levels.Add(Level.buildLevelThree());
         }
 
         /// <summary>
@@ -165,9 +180,8 @@ namespace _2DGame
             updateIntro(ks);
             escPressed(ks);
             nextLevel(ks);
-            restartLevel(ks);
+            restartGame(ks);
             
-
             // Updates Objects in the gameworld (if they are currently allowed to)
             if (canMove)
             {
@@ -204,8 +218,7 @@ namespace _2DGame
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
 
-            //Draw Intro
-            drawIntro(spriteBatch);
+
             // Draw Win
             drawWin(spriteBatch);
             // Check Lose
@@ -221,6 +234,10 @@ namespace _2DGame
             spriteBatch.DrawString(scoreFont, "Score: " + score.ToString(), scoreLoc, Color.White);
             // Draw Timer
             spriteBatch.DrawString(timeFont, "Time Remaining: " + (time / 100).ToString(), timeLoc, Color.White);
+            // Draw Current Level
+            spriteBatch.DrawString(timeFont, "Current Level: " + (curLevel + 1), new Vector2(10, 60), Color.White);
+            //Draw Intro
+            drawIntro(spriteBatch);
 
             spriteBatch.End();
 
@@ -313,6 +330,13 @@ namespace _2DGame
             {
                 decrementTime = false;
                 sb.DrawString(winLoseFont, "You've Won!", winLoc, Color.White);
+                if (curLevel >= maxLevels - 1)
+                {
+                    sb.DrawString(winLoseFont, "Press R to Restart", new Vector2(width / 2 - 275, height / 3), Color.White);
+                    sb.DrawString(winLoseFont, "Score: " + score, new Vector2(width / 2 - 175, height / 2), Color.White);
+                }
+                else
+                    sb.DrawString(winLoseFont, "Press Space to Continue", new Vector2(width / 2 - 375, height / 3), Color.White);
             }
         }
 
@@ -327,18 +351,27 @@ namespace _2DGame
         }
 
         // restart the game if the player decides to
-        protected void restartLevel(KeyboardState ks)
+        protected void restartGame(KeyboardState ks)
         {
-            if ((hasWon || hasLost) && ks.IsKeyDown(Keys.R))
+            if ((hasLost || hasWon) && ks.IsKeyDown(Keys.R))
             {
+                enemies.Clear();
+                levels.Clear();
+                levels.Add(Level.buildLevelOne());
+                levels.Add(Level.buildLevelTwo());
+                levels.Add(Level.buildLevelThree());
+                curLevel = -1;
+
                 player.location = origin;
                 canMove = true;
-                enemies.Clear();
                 decrementTime = true;
+                score = 0;
+                points = 100;
+                time = 3000;
                 hasLost = false;
                 hasWon = false;
-                // Need to reset the enemies now
-                time = 3000;
+
+                updateLevel();
             }
         }
 
@@ -362,6 +395,7 @@ namespace _2DGame
                 intro2 = false;
                 canMove = true;
                 decrementTime = true;
+                player.location = ArcadeShooter.origin;
                 updateLevel();
             }
         }

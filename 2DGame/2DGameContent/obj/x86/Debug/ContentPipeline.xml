@@ -7,7 +7,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\playerShip.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\playerShip.xnb</Output>
       <Time>2014-10-27T21:31:24.2722509-04:00</Time>
     </Item>
     <Item>
@@ -16,7 +16,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Horizon.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\Horizon.xnb</Output>
       <Time>2014-10-27T21:31:24.2482495-04:00</Time>
     </Item>
     <Item>
@@ -25,7 +25,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Chaser.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\Chaser.xnb</Output>
       <Time>2014-10-27T21:31:24.2472494-04:00</Time>
     </Item>
     <Item>
@@ -34,7 +34,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Fleeler.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\Fleeler.xnb</Output>
       <Time>2014-10-27T21:31:24.2482495-04:00</Time>
     </Item>
     <Item>
@@ -43,7 +43,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Vertician.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\Vertician.xnb</Output>
       <Time>2014-10-27T21:31:24.2502496-04:00</Time>
     </Item>
     <Item>
@@ -52,7 +52,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Reticle.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\Reticle.xnb</Output>
       <Time>2014-10-27T21:31:24.2492496-04:00</Time>
     </Item>
     <Item>
@@ -61,7 +61,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Bullet.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\Bullet.xnb</Output>
       <Time>2014-10-27T21:31:24.2462494-04:00</Time>
     </Item>
     <Item>
@@ -70,62 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Bomb.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\Bomb.xnb</Output>
       <Time>2014-10-27T21:31:24.2452493-04:00</Time>
-    </Item>
-    <Item>
-      <Source>Laser.wav</Source>
-      <Name>Laser</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\Laser.xnb</Output>
-      <Time>2014-10-27T21:31:24.2492496-04:00</Time>
-    </Item>
-    <Item>
-      <Source>success.wav</Source>
-      <Name>success</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\success.xnb</Output>
-      <Time>2014-10-27T21:31:24.274251-04:00</Time>
-    </Item>
-    <Item>
-      <Source>base2.wav</Source>
-      <Name>base2</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\base2.xnb</Output>
-      <Time>2014-10-27T21:31:24.2672506-04:00</Time>
-    </Item>
-    <Item>
-      <Source>scoreFont.spritefont</Source>
-      <Name>scoreFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\scoreFont.xnb</Output>
-      <Time>2014-10-27T21:31:24.2732509-04:00</Time>
-    </Item>
-    <Item>
-      <Source>timeFont.spritefont</Source>
-      <Name>timeFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\timeFont.xnb</Output>
-      <Time>2014-10-27T21:31:24.275251-04:00</Time>
-    </Item>
-    <Item>
-      <Source>winLoseFont.spritefont</Source>
-      <Name>winLoseFont</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\winLoseFont.xnb</Output>
-      <Time>2014-10-27T21:31:24.275251-04:00</Time>
     </Item>
     <Item>
       <Source>intro.png</Source>
@@ -133,7 +79,7 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\intro.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\intro.xnb</Output>
       <Time>2014-10-27T23:50:20.783072-04:00</Time>
     </Item>
     <Item>
@@ -142,8 +88,62 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\introPlayer.xnb</Output>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\introPlayer.xnb</Output>
       <Time>2014-10-27T23:29:22.5701064-04:00</Time>
+    </Item>
+    <Item>
+      <Source>Laser.wav</Source>
+      <Name>Laser</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\Laser.xnb</Output>
+      <Time>2014-10-27T21:31:24.2492496-04:00</Time>
+    </Item>
+    <Item>
+      <Source>success.wav</Source>
+      <Name>success</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\success.xnb</Output>
+      <Time>2014-10-27T21:31:24.274251-04:00</Time>
+    </Item>
+    <Item>
+      <Source>base2.wav</Source>
+      <Name>base2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\base2.xnb</Output>
+      <Time>2014-10-27T21:31:24.2672506-04:00</Time>
+    </Item>
+    <Item>
+      <Source>scoreFont.spritefont</Source>
+      <Name>scoreFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\scoreFont.xnb</Output>
+      <Time>2014-10-27T21:31:24.2732509-04:00</Time>
+    </Item>
+    <Item>
+      <Source>timeFont.spritefont</Source>
+      <Name>timeFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\timeFont.xnb</Output>
+      <Time>2014-10-27T21:31:24.275251-04:00</Time>
+    </Item>
+    <Item>
+      <Source>winLoseFont.spritefont</Source>
+      <Name>winLoseFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\winLoseFont.xnb</Output>
+      <Time>2014-10-27T21:31:24.275251-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -151,10 +151,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGameContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGameContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Chris\Documents\GitHub\ArcadeShooter\2DGame\2DGame\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Chris\Documents\Games\2DGame\2DGameContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Chris\Documents\Games\2DGame\2DGame\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Chris\Documents\Games\2DGame\2DGameContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Chris\Documents\Games\2DGame\2DGame\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
