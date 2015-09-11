@@ -11,6 +11,4 @@ ArcadeShooter
 Currently there are three levels, but it's easy to add more.
 Simply add a new Level builder method in the level class to instantiate more enemies.
 
-This project was created for Game Engines, Fall of 2014. While I have finished the game
-in this format, I will likely be porting it to Unity fairly soon.
-
+This project was created for Game Engines, Fall of 2014. 
